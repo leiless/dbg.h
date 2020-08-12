@@ -10,6 +10,50 @@
 #ifndef DBG_H_c49aa87c_54eb_46d2_8d72_a51f5efce1ac
 #define DBG_H_c49aa87c_54eb_46d2_8d72_a51f5efce1ac
 
+#include <stdio.h>
+#include <assert.h>
 
+#ifdef DBG_DEF_ONCE
+#include <string.h>
+
+/**
+ * basename(3) have inconsistent implementation across UNIX-like systems.
+ * Besides, Windows doesn't have such API.
+ */
+const char * bname_b49cf5f693ad(const char *path)
+{
+    const char *p;
+#ifdef _WIN32
+    p = strrchr(path, '\\');
+#else
+    p = strrchr(path, '/');
+#endif
+    return p != NULL ? p + 1 : path;
+}
+
+#ifdef _WIN32
+#define __FILE0__       __FILE__
+#else
+#define __FILE0__       __BASE_FILE__
+#endif
+#endif      /* DBG_DEF_ONCE */
+
+/*
+ * Taken from https://stackoverflow.com/a/2653351/13600780
+ * see: linux/include/linux/stringify.h
+ */
+#define __xstr0(x)                  #x
+#define __xstr(x)                   __xstr0(x)
+
+#define __dbg0(out, x, fs)      ({                                                      \
+    typeof(x) _x0 = (x);                                                                \
+    int _n0 = fprintf(out, "[%s:%d (%s)] %s = " __xstr(fs) " (%" __xstr(fs) ")\n",      \
+                        bname_b49cf5f693ad(__FILE0__), __LINE__, __func__, #x, _x0);    \
+    assert(_n0 > 0);                                                                    \
+    _x0;                                                                                \
+})
+
+#define dbg(x, fs)      __dbg0(stdout, x, fs)
+#define dbge(x, fs)     __dbg0(stderr, x, fs)
 
 #endif
