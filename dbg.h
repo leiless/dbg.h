@@ -30,13 +30,29 @@ const char *bname_b49cf5f693ad(const char *path)
 #endif
     return p != NULL ? p + 1 : path;
 }
-
-#ifdef _WIN32
-#define __FILE0__       __FILE__
-#else
-#define __FILE0__       __BASE_FILE__
-#endif
 #endif      /* DBG_DEF_ONCE */
+
+/**
+ * Taken from https://github.com/sharkdp/dbg-macro
+ */
+#if defined(__unix__) || (defined(__APPLE__) && defined(__MACH__))
+#define DBG_H_IS_UNIX
+#endif
+
+#define COL_NONE    ""
+#define COL_RST     "\x1b[0m"
+#define COL_DBG     "\x1b[02m"
+#define COL_EXPR    "\x1b[36m"
+#define COL_VAL     "\x1b[01m"
+#define COL_TYPE    "\x1b[32m"
+
+#ifdef DBG_H_IS_UNIX
+#include <unistd.h>
+#define _COL(out, col)          (isatty(fileno(out)) ? col : COL_NONE)
+#else
+/* XXX: Assume it's colorized output */
+#define _COL(out, col)          (col)
+#endif
 
 /*
  * Taken from https://stackoverflow.com/a/2653351/13600780
@@ -45,12 +61,25 @@ const char *bname_b49cf5f693ad(const char *path)
 #define __xstr0(x)                  #x
 #define __xstr(x)                   __xstr0(x)
 
-#define __dbg0(out, x, fs)      ({                                                      \
-    typeof(x) _x0 = (x);                                                                \
-    int _n0 = fprintf(out, "[%s:%d (%s)] %s = " __xstr(fs) " (%s)\n",                   \
-                    bname_b49cf5f693ad(__FILE0__), __LINE__, __func__, #x, _x0, #fs);   \
-    assert(_n0 > 0);                                                                    \
-    _x0;                                                                                \
+#ifdef _WIN32
+#define __FILE0__       __FILE__
+#else
+#define __FILE0__       __BASE_FILE__
+#endif
+
+#define __dbg0(out, x, fs)      ({                                                  \
+    typeof(x) _x0 = (x);                                                            \
+    int _n0 = fprintf(                                                              \
+                out, "%s[%s:%d (%s)]%s %s%s%s = %s" __xstr(fs) "%s (%s%s%s)\n",     \
+                _COL(out, COL_DBG),                                                 \
+                bname_b49cf5f693ad(__FILE0__), __LINE__, __func__,                  \
+                _COL(out, COL_RST),                                                 \
+                _COL(out, COL_EXPR), #x, _COL(out, COL_RST),                        \
+                _COL(out, COL_VAL), _x0, _COL(out, COL_RST),                        \
+                _COL(out, COL_TYPE), #fs, _COL(out, COL_RST)                        \
+            );                                                                      \
+    assert(_n0 > 0);                                                                \
+    _x0;                                                                            \
 })
 
 #define dbg(x, fs)      __dbg0(stdout, x, fs)

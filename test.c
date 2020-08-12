@@ -17,5 +17,6 @@ int main(void) {
     factorial(4);
     const char *s = "hello world";
     dbg(s, %s);
+    dbge(sizeof(double), %zu);
     return 0;
 }
