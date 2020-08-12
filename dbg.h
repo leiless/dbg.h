@@ -20,7 +20,7 @@
  * basename(3) have inconsistent implementation across UNIX-like systems.
  * Besides, Windows doesn't have such API.
  */
-const char * bname_b49cf5f693ad(const char *path)
+const char *bname_b49cf5f693ad(const char *path)
 {
     const char *p;
 #ifdef _WIN32
@@ -47,8 +47,8 @@ const char * bname_b49cf5f693ad(const char *path)
 
 #define __dbg0(out, x, fs)      ({                                                      \
     typeof(x) _x0 = (x);                                                                \
-    int _n0 = fprintf(out, "[%s:%d (%s)] %s = " __xstr(fs) " (%" __xstr(fs) ")\n",      \
-                        bname_b49cf5f693ad(__FILE0__), __LINE__, __func__, #x, _x0);    \
+    int _n0 = fprintf(out, "[%s:%d (%s)] %s = " __xstr(fs) " (%s)\n",                   \
+                    bname_b49cf5f693ad(__FILE0__), __LINE__, __func__, #x, _x0, #fs);   \
     assert(_n0 > 0);                                                                    \
     _x0;                                                                                \
 })
