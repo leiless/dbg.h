@@ -48,7 +48,7 @@ const char *bname_b49cf5f693ad(const char *path)
 
 #ifdef DBG_H_IS_UNIX
 #include <unistd.h>
-#define _COL(out, col)          (isatty(fileno(out)) ? col : COL_NONE)
+#define _COL(out, col)          (isatty(fileno(out)) ? (col) : COL_NONE)
 #else
 /* XXX: Assume it's colorized output */
 #define _COL(out, col)          (col)

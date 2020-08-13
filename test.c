@@ -3,12 +3,9 @@
 #define DBG_DEF_ONCE
 #include "dbg.h"
 
-int factorial(int n) {
-    if (dbg(n <= 1, %d)) {
-        return dbg(1, %d);
-    } else {
-        return dbg(n * factorial(n - 1), %d);
-    }
+static int factorial(int n) {
+    if (dbg(n <= 1, %d)) return dbg(1, %d);
+    return dbg(n * factorial(n - 1), %d);
 }
 
 int main(void) {
@@ -17,8 +14,9 @@ int main(void) {
     factorial(4);
     const char *s = "hello world";
     dbg(s, %s);
-    dbge(sizeof(double), %zu);\
+    dbge(sizeof(double), %zu);
     dbg(&main, %p);
     dbg(main == &main, %d);
+    dbg("this line is executed", %s);
     return 0;
 }
