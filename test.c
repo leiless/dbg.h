@@ -1,6 +1,7 @@
 #include <stdio.h>
 
-#define DBG_DEF_ONCE
+#define DBG_H_DEF_ONCE
+//#define DBG_H_DISABLE
 #include "dbg.h"
 
 static int factorial(int n) {
