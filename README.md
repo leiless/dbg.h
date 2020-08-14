@@ -2,11 +2,11 @@
 
 `dbg.h` is a clumsy duplication of [sharkdp/dbg-macro](https://github.com/sharkdp/dbg-macro), which mainly target for C89.
 
-This project provides a single header file with two macros `dbg(...)` and `dbge(...)` that can be used in all circumstances where you would typically write `printf("...", ...)` or `fprintf(stderr, "...", ...)`.
+This project provides [a single header file](dbg.h) with two macros `dbg(...)` and `dbge(...)` that can be used in all circumstances where you would typically write `printf("...", ...)` or `fprintf(stderr, "...", ...)`.
 
 The `dbg(...)` will prints debugging output to the `stdout`, yet the `dbge(...)` will prints to the `stderr`.
 
-`dbg*(...)` macro takes two arguments: the former is the expression itself, the latter is the format specifier (just as in `printf(3)`).
+`dbg*(...)` macro takes two arguments: the former is the expression itself, the latter is the format specifier (just as in [`printf(3)`](https://www.man7.org/linux/man-pages/man3/printf.3.html)).
 
 # Example
 
@@ -35,7 +35,7 @@ int main(void) {
 }
 ```
 
-Note that the format specifier(the second argument) is not double-quoted.
+Note that the format specifier(the second argument) is **NOT** double-quoted.
 
 Sample output of above code:
 
@@ -67,7 +67,7 @@ The exact output printed by this macro should not be relied upon and is subject 
 
 # Panics
 
-Panics if writing to `fprintf(3)` fails (by calling `assert(3)`, so `#define NDEBUG` will disable this panic).
+Panics if writing to [`fprintf(3)`](https://www.man7.org/linux/man-pages/man3/fprintf.3.html) fails (by calling [`assert(3)`](https://www.man7.org/linux/man-pages/man3/assert.3.html), so `#define NDEBUG` will disable this panic).
 
 P.S. this is extreme unlikely to happen.
 
