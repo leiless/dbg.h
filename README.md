@@ -6,6 +6,8 @@ This project provides a single header file with two macros `dbg(...)` and `dbge(
 
 The `dbg(...)` will prints debugging output to the `stdout`, yet the `dbge(...)` will prints to the `stderr`.
 
+`dbg*(...)` macro takes two arguments: the former is the expression itself, the latter is the format specifier (just as in `printf(3)`).
+
 # Example
 
 ```c
@@ -32,6 +34,8 @@ int main(void) {
     return 0;
 }
 ```
+
+Note that the format specifier(the second argument) is not double-quoted.
 
 Sample output of above code:
 
@@ -63,7 +67,7 @@ The exact output printed by this macro should not be relied upon and is subject 
 
 # Panics
 
-Panics if writing to `fprintf(3)` fails (by `assert(3)`, so `#define NDEBUG` will disable this panic).
+Panics if writing to `fprintf(3)` fails (by calling `assert(3)`, so `#define NDEBUG` will disable this panic).
 
 P.S. this is extreme unlikely to happen.
 
