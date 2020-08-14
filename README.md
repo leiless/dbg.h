@@ -35,7 +35,7 @@ int main(void) {
 
 Sample output of above code:
 
-TODO
+![dbg.h example output](https://user-images.githubusercontent.com/38041294/90267639-6f278180-de88-11ea-866a-05052c2c4ef0.png)
 
 # Features
 
