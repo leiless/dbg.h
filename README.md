@@ -1,8 +1,8 @@
 # `dbg(...)`
 
-`dbg.h` is a clumsy duplication of [sharkdp/dbg-macro](https://github.com/sharkdp/dbg-macro), which mainly target for C89.
+`dbg.h` is a clumsy replica of [sharkdp/dbg-macro](https://github.com/sharkdp/dbg-macro), which mainly target for C89 and above.
 
-This project provides [a single header file](dbg.h) with two macros `dbg(...)` and `dbge(...)` that can be used in all circumstances where you would typically write `printf("...", ...)` or `fprintf(stderr, "...", ...)`.
+This project provides [a single header file](dbg.h) with two macros `dbg(...)` and `dbge(...)` that can be used in all circumstances where you would typically write [`printf(...)`](https://www.man7.org/linux/man-pages/man3/printf.3.html) or [`fprintf(...)`](https://www.man7.org/linux/man-pages/man3/fprintf.3.html).
 
 The `dbg(...)` will prints debugging output to the `stdout`, yet the `dbge(...)` will prints to the `stderr`.
 
