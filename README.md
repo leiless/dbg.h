@@ -1,5 +1,7 @@
 # `dbg(...)`
 
+[![Try it online](https://img.shields.io/badge/try-online-f34b7d.svg)](https://repl.it/@leiless/dbgh-demo) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](dbg.h)
+
 `dbg.h` is a clumsy replica of [sharkdp/dbg-macro](https://github.com/sharkdp/dbg-macro), which mainly target for C89 and above.
 
 This project provides [a single header file](dbg.h) with two macros `dbg(...)` and `dbge(...)` that can be used in all circumstances where you would typically write [`printf(...)`](https://www.man7.org/linux/man-pages/man3/printf.3.html) or [`fprintf(...)`](https://www.man7.org/linux/man-pages/man3/fprintf.3.html).
@@ -39,7 +41,7 @@ You must `#define DBG_H_DEF_ONCE` only once before include the "dbg.h".
 
 Note that the format specifier(the second argument) is **NOT** double-quoted.
 
-Sample output of above code:
+Sample output of above code ([try it yourself](https://repl.it/@leiless/dbgh-demo)):
 
 ![dbg.h example output](https://user-images.githubusercontent.com/38041294/90267639-6f278180-de88-11ea-866a-05052c2c4ef0.png)
 
