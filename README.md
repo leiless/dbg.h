@@ -35,15 +35,17 @@ int main(void) {
 }
 ```
 
+You must `#define DBG_H_DEF_ONCE` only once before include the "dbg.h".
+
 Note that the format specifier(the second argument) is **NOT** double-quoted.
 
 Sample output of above code:
 
 ![dbg.h example output](https://user-images.githubusercontent.com/38041294/90267639-6f278180-de88-11ea-866a-05052c2c4ef0.png)
 
-# Features
+# Feature
 
-* Easy to read, colorized output (colors auto-disable when the output is not an interactive terminal)
+* Easy to read, colorized output (colors will be disable when the output is not an interactive terminal)
 
 * Prints file name, line number, function name and the original expression
 
@@ -51,7 +53,7 @@ Sample output of above code:
 
 * Can be used inside expressions (passing through the original value)
 
-* The dbg.h header issues a compiler warning when included (so you don't forget to remove it)
+* The `dbg.h` header issues a compiler warning when included (so you don't forget to remove it)
 
 * Compatible with C89, C99, C11.
 
