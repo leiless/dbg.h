@@ -43,7 +43,7 @@ Note that the format specifier(the second argument) is **NOT** double-quoted.
 
 Sample output of above code ([try it yourself](https://repl.it/@leiless/dbgh-demo)):
 
-![dbg.h example output](https://user-images.githubusercontent.com/38041294/90267639-6f278180-de88-11ea-866a-05052c2c4ef0.png)
+![dbg.h example output](https://user-images.githubusercontent.com/38041294/90304146-2e128a00-dee7-11ea-8462-2854dfdeac03.png)
 
 # Feature
 
