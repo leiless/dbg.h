@@ -56,45 +56,47 @@ const char *bname_b49cf5f693ad(const char *path)
 
 #ifdef DBG_H_IS_UNIX
 #include <unistd.h>
-#define _COL(out, col)          (isatty(fileno(out)) ? (col) : COL_NONE)
+#define DBG_H_COL(out, col)          (isatty(fileno(out)) ? (col) : COL_NONE)
 #else
 /* XXX: Assume it's colorized output */
-#define _COL(out, col)          (col)
+#define DBG_H_COL(out, col)          (col)
 #endif
 
 /*
  * Taken from https://stackoverflow.com/a/2653351/13600780
  * see: linux/include/linux/stringify.h
  */
-#define __xstr0(x)                  #x
-#define __xstr(x)                   __xstr0(x)
+#ifndef xstr
+#define xstr0(x)                    #x
+#define xstr(x)                     xstr0(x)
+#endif
 
 #ifdef _WIN32
-#define __FILE0__       __FILE__
+#define DBG_H_FILE       __FILE__
 #else
-#define __FILE0__       __BASE_FILE__
+#define DBG_H_FILE       __BASE_FILE__
 #endif
 
 #ifndef DBG_H_DISABLE
-#define __dbg0(out, x, fs)      ({                                                  \
+#define x_dbg_ac3a285c(out, x, fs)      ({                                          \
     typeof(x) _x0 = (x);                                                            \
     int _n0 = fprintf(                                                              \
-                out, "%s[%s:%d (%s)]%s %s%s%s = %s" __xstr(fs) "%s (%s%s%s)\n",     \
-                _COL(out, COL_DBG),                                                 \
-                bname_b49cf5f693ad(__FILE0__), __LINE__, __func__,                  \
-                _COL(out, COL_RST),                                                 \
-                _COL(out, COL_EXPR), #x, _COL(out, COL_RST),                        \
-                _COL(out, COL_VAL), _x0, _COL(out, COL_RST),                        \
-                _COL(out, COL_TYPE), #fs, _COL(out, COL_RST)                        \
+                out, "%s[%s:%d (%s)]%s %s%s%s = %s" xstr(fs) "%s (%s%s%s)\n",       \
+                DBG_H_COL(out, COL_DBG),                                            \
+                bname_b49cf5f693ad(DBG_H_FILE), __LINE__, __func__,                 \
+                DBG_H_COL(out, COL_RST),                                            \
+                DBG_H_COL(out, COL_EXPR), #x, DBG_H_COL(out, COL_RST),              \
+                DBG_H_COL(out, COL_VAL), _x0, DBG_H_COL(out, COL_RST),              \
+                DBG_H_COL(out, COL_TYPE), #fs, DBG_H_COL(out, COL_RST)              \
             );                                                                      \
     assert(_n0 > 0);                                                                \
     _x0;                                                                            \
 })
 #else
-#define __dbg0(out, x, fs)      ((void) (out), (void) (#fs), (x))
+#define x_dbg_ac3a285c(out, x, fs)      ((void) (out), (void) (#fs), (x))
 #endif
 
-#define dbg(x, fs)      __dbg0(stdout, x, fs)
-#define dbge(x, fs)     __dbg0(stderr, x, fs)
+#define dbg(x, fs)      x_dbg_ac3a285c(stdout, x, fs)
+#define dbge(x, fs)     x_dbg_ac3a285c(stderr, x, fs)
 
 #endif
