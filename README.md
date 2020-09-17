@@ -1,6 +1,8 @@
 # `dbg(...)`
 
-[![Try it online](https://img.shields.io/badge/try-online-f34b7d.svg)](https://repl.it/@leiless/dbgh-demo) [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](dbg.h)
+[![Try it online](https://img.shields.io/badge/try-online-f34b7d.svg)](https://repl.it/@leiless/dbgh-demo)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/dc306b17f94e427693b06e797a933d29)](https://www.codacy.com/manual/leiless/dbg.h?utm_source=github.com&amp;utm_medium=referral&amp;utm_content=leiless/dbg.h&amp;utm_campaign=Badge_Grade)
+[![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](dbg.h)
 
 `dbg.h` is a clumsy replica of [sharkdp/dbg-macro](https://github.com/sharkdp/dbg-macro), which mainly target for C89 and above.
 
